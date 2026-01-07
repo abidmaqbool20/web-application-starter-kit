@@ -1,0 +1,10 @@
+import { Module } from '@nestjs/common';
+import { AuthResolver } from './auth.resolver';
+import { AuthModule } from '../../../modules/auth/auth.module';
+import { UsersModule } from '../../../modules/users/users.module';
+
+@Module({
+    imports: [AuthModule, UsersModule],
+    providers: [AuthResolver],
+})
+export class AuthGraphQLModule { }

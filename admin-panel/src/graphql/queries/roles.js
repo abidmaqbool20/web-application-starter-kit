@@ -1,0 +1,29 @@
+import { gql } from '@apollo/client';
+
+export const GET_ROLES = gql`
+  query GetRoles {
+    roles {
+      id
+      name
+      permissions {
+        id
+        name
+        key
+      }
+    }
+  }
+`;
+
+export const GET_ROLE = gql`
+  query GetRole($id: ID!) {
+    role(id: $id) {
+      id
+      name
+      permissions {
+        id
+        name
+        key
+      }
+    }
+  }
+`;

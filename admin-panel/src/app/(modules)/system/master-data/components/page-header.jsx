@@ -1,0 +1,50 @@
+"use client";
+
+import BreadcrumbComponent from "@/components/breadcrumb";
+import { Button } from "@/components/ui/button";
+import { Plus, RefreshCw } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { openCreateModal, fetchMasterDataList } from "@/slices/masterDataSlice";
+
+export default function PageHeader() {
+    const dispatch = useDispatch();
+    const { loading } = useSelector((state) => state.masterData);
+
+    const handleCreate = () => {
+        dispatch(openCreateModal());
+    };
+
+    const handleRefresh = () => {
+        dispatch(fetchMasterDataList());
+    };
+
+    return (
+        <div className="flex flex-col">
+            {/* Page Title and Action Buttons */}
+            <div className="flex flex-col md:flex-row items-center justify-between">
+                <h1 className="text-2xl font-bold">Master Data</h1>
+                <div className="flex items-center gap-2 mt-4 md:mt-0">
+                    <Button
+                        variant="outline"
+                        onClick={handleRefresh}
+                        disabled={loading}
+                        className="gap-2 border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white"
+                    >
+                        <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
+                        Refresh
+                    </Button>
+                    <Button
+                        onClick={handleCreate}
+                        className="gap-2 bg-[var(--primary)] hover:bg-[var(--primary)]/90"
+                    >
+                        <Plus className="h-4 w-4" />
+                        Add Entry
+                    </Button>
+                </div>
+            </div>
+
+            {/* Breadcrumb */}
+            <BreadcrumbComponent />
+        </div>
+    );
+}

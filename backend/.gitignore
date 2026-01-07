@@ -1,0 +1,8 @@
+node_modules/
+.env
+.env.*
+dist/
+
+# GraphQL auto-generated schemas
+src/graphql/schemas/*.gql
+!src/graphql/schemas/schema-generator.ts
